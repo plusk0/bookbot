@@ -18,25 +18,21 @@ def get_num_char(filepath):
         word_list = f.read()
     for char in word_list:
         if char.isalpha():
-
             if char in seen_list:
 
-                for entry in letter_list:
-                    print(entry)
-                    for value in entry:
-                        if value == char:
-                            #print(entry[0])
-                            entry[f"{char}"] += 1
-                letter_list[2] = {char, 2}
-                #[letter for letter in letter_list if letter[0] == char]
+                for tuple in letter_list:
 
-                #etter_list[char.lower()] += 1
+                    for value in tuple:
+                        if value == char:
+                            print(tuple)
+                            tuple = 1 # change old tuple to new tuple (tuple with ex. e : 1 -> e : 2)
+
+
             else:
-                print("test2")
                 letter_list.append({char.lower(), 1})
                 seen_list.append(char)
                 print(letter_list)
-                time.sleep(0.5)
+                time.sleep(0.2)
 
 
 
