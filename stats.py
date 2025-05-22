@@ -8,31 +8,30 @@ def get_num_words(filepath):
         return len(word_list)
     
 def get_sorted_list(filepath):
-    letter_list = []
-    seen_list = []
+    letter_table = {}
     with open(filepath) as f:
         word_list = f.read()
     for char in word_list:
         if char.isalpha():
             char = char.lower()
-            if char in seen_list:
-                for letter in letter_list:
-                    if letter[0]== char:
-                        index = letter_list.index(letter)
-                        letter_list[index] = tuple(list((letter[0],letter[1]+1)))
+            if char in letter_table:
+                letter_table[char] += 1
             else:
-                letter_list.append((char, 1))
-                seen_list.append(char)
+                letter_table[char] = 1
+    sorted_list = []
 
-    letter_list.sort(reverse= True, key=lambda func : func[1])
-    return letter_list
+    for entry in letter_table:
+        sorted_list.append({"char": entry, "number":letter_table[entry]})
+    sorted_list.sort(reverse=True, key=lambda a: a["number"])
+    print(sorted_list)
+    return sorted_list
 
 
 def format(sorted_list):
     string = ""
     for entry in sorted_list:
         
-        string = str(string + str(entry[0])+ ": " + str(entry[1]) + "\n")
+        string = str(string + str(entry["char"])+ ": " + str(entry["number"]) + "\n")
     return string
 
 
