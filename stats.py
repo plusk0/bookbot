@@ -1,9 +1,5 @@
 import time
 
-
-def sort_on(dict):
-    return dict[1]
-
 def get_num_words(filepath):
 
     with open(filepath) as f:
@@ -11,7 +7,7 @@ def get_num_words(filepath):
         word_list = contents.split()
         return len(word_list)
     
-def get_num_char(filepath):
+def get_sorted_list(filepath):
     letter_list = []
     seen_list = []
     with open(filepath) as f:
@@ -20,7 +16,6 @@ def get_num_char(filepath):
         if char.isalpha():
             char = char.lower()
             if char in seen_list:
-
                 for letter in letter_list:
                     if letter[0]== char:
                         index = letter_list.index(letter)
@@ -29,8 +24,8 @@ def get_num_char(filepath):
                 letter_list.append((char, 1))
                 seen_list.append(char)
 
-    sorted_list = sorted(letter_list, reverse= True, key=lambda func : func[1])
-    return sorted_list
+    letter_list.sort(reverse= True, key=lambda func : func[1])
+    return letter_list
 
 
 def format(sorted_list):
@@ -44,7 +39,7 @@ def format(sorted_list):
 
 def output(filepath):
     num_words = get_num_words(filepath)
-    output_list = (format(get_num_char(filepath)))
+    output_list = (format(get_sorted_list(filepath)))
 
     print(f"============ BOOKBOT ============ \n")
     print(f"Analyzing book found at {filepath}...\n")
